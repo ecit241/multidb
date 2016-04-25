@@ -1,0 +1,5 @@
+.idea/
+*.iml
+logs/
+weimob-bs-multidb-demo/target/
+weimob-bs-multidb/target/
