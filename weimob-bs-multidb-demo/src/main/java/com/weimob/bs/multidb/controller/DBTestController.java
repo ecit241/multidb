@@ -1,15 +1,15 @@
 package com.weimob.bs.multidb.controller;
 
-import com.weimob.bs.multidb.dao.mysql.model.Message;
-import com.weimob.bs.multidb.facade.MessageFacadeService;
+import com.weimob.bs.multidb.dao.mysql.model.message.Message;
+import com.weimob.bs.multidb.dao.mysql.model.qs.QS;
+import com.weimob.bs.multidb.facade.message.MessageFacadeService;
+import com.weimob.bs.multidb.facade.qs.QSFacadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by Adam on 2016/4/25.
@@ -20,20 +20,26 @@ public class DBTestController {
     @Autowired
     MessageFacadeService messageService;
 
+    @Autowired
+    QSFacadeService qsFacadeService;
+
     @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public Object test(@RequestParam(value = "name", required = true) String name) {
+    public Object test() {
         List<Message> messages = messageService.selectAll();
         return messages;
     }
 
     @RequestMapping(value = "/test1", method = RequestMethod.GET)
-    public Object test1(@RequestParam(value = "name", required = true) String name) {
+    public Object test1() {
+        List<QS> messages = qsFacadeService.selectAll();
+        return messages;
+    }
+
+    @RequestMapping(value = "/test2", method = RequestMethod.GET)
+    public Object test2() {
         Message message = new Message();
-        message.setContent("hahah");
-        message.setReceiveDate(20160425);
-        message.setMessageType(1);
-        message.setCreateBy("dexin.su");
         Integer integer = messageService.insert(message);
+
         return integer;
     }
 }

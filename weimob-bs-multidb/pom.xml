@@ -14,21 +14,6 @@
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
 
-    <properties>
-        <mybatis.version>3.3.1</mybatis.version>
-        <mapper.version>3.3.8</mapper.version>
-        <persistence-api.version>1.0</persistence-api.version>
-        <pagehelper.version>4.1.3</pagehelper.version>
-        <jsqlparser.version>0.9.4</jsqlparser.version>
-        <hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
-        <javax.el-api.version>2.2.4</javax.el-api.version>
-        <javax.el.version>2.2.4</javax.el.version>
-        <mybatis.version>3.3.1</mybatis.version>
-        <spymemcached.version>2.12.0</spymemcached.version>
-        <mybatis-spring.version>1.2.2</mybatis-spring.version>
-        <spring-tx.version>4.2.5.RELEASE</spring-tx.version>
-    </properties>
-
     <dependencies>
         <!-- 分库分表中间件 -->
         <dependency>
@@ -42,87 +27,89 @@
             <artifactId>mapper</artifactId>
             <version>${mapper.version}</version>
         </dependency>
-        <!-- 通用Mapper的JPA注解依赖 -->
-        <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>persistence-api</artifactId>
-            <version>${persistence-api.version}</version>
-        </dependency>
         <!-- 分页助手 -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
             <version>${pagehelper.version}</version>
         </dependency>
-        <!-- 分页助手依赖 -->
-        <dependency>
-            <groupId>com.github.jsqlparser</groupId>
-            <artifactId>jsqlparser</artifactId>
-            <version>${jsqlparser.version}</version>
-        </dependency>
-        <!-- hibernate校验器 -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>${hibernate-validator.version}</version>
-        </dependency>
-        <!-- hibernate校验器依赖 -->
-        <dependency>
-            <groupId>javax.el</groupId>
-            <artifactId>javax.el-api</artifactId>
-            <version>${javax.el-api.version}</version>
-        </dependency>
-        <!-- hibernate校验器依赖 -->
-        <dependency>
-            <groupId>org.glassfish.web</groupId>
-            <artifactId>javax.el</artifactId>
-            <version>${javax.el.version}</version>
-        </dependency>
         <!-- mybatis -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
             <version>${mybatis.version}</version>
-            <scope>compile</scope>
-            <optional>true</optional>
         </dependency>
+        <!-- memcached/ocs 框架 -->
         <dependency>
             <groupId>net.spy</groupId>
             <artifactId>spymemcached</artifactId>
             <version>${spymemcached.version}</version>
         </dependency>
+        <!-- mybatis spring支持 -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
             <version>${mybatis-spring.version}</version>
         </dependency>
+        <!-- spring事务支持 -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
             <version>${spring-tx.version}</version>
         </dependency>
+        <!-- 主流数据库连接池 -->
         <dependency>
-            <groupId>commons-dbcp</groupId>
-            <artifactId>commons-dbcp</artifactId>
-            <version>${commons-dbcp.version}</version>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>2.4.5</version>
+        </dependency>
+        <!-- spring jdbc 相关 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>4.2.5.RELEASE</version>
+        </dependency>
+        <!-- spring jdbc 相关 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>4.2.5.RELEASE</version>
+        </dependency>
+        <!-- aop 支持 -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.2.4.Final</version>
         </dependency>
     </dependencies>
     <build>
-        <!--子项目可以引用的默认插件信息。该插件配置项直到被引用时才会被解析或绑定到生命周期。给定插件的任何本地配置都会覆盖这里的配置-->
-        <pluginManagement>
-            <plugins>
-                <!-- 配置JVM版本 -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.2</version>
-                    <configuration>
-                        <source>1.7</source>
-                        <target>1.7</target>
-                        <encoding>UTF-8</encoding>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
+        <plugins>
+            <!-- 发布jar包到私有仓库 -->
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.1</version>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 </project>

@@ -1,7 +1,7 @@
 package com.weimob.bs.multidb.config.algorithm;
 
 import com.google.common.collect.Range;
-import com.weimob.bs.multidb.mysql.sjsupport.algorith.BaseDatabaseAlgorith;
+import com.weimob.bs.multidb.dao.mysql.sjsupport.algorith.BaseDatabaseAlgorith;
 import com.weimob.bs.multidb.utils.CommonUtil;
 
 /**
@@ -11,12 +11,12 @@ public class MessageDatabaseAlgorithm extends BaseDatabaseAlgorith<Integer> {
 
     @Override
     public boolean checkValue(String name, Integer value) {
-        return name.contains("_" + value.toString().substring(4, 6));
+        return name.endsWith("_" + value.toString().substring(4, 6));
     }
 
     @Override
     public boolean checkRange(String name, Range<Integer> range) {
         String[] names = name.split("_");
-        return CommonUtil.strToInteger(names[names.length - 1].substring(0, 2), 0).compareTo(range.lowerEndpoint()) >= 0 && CommonUtil.strToInteger(names[names.length - 1].substring(0, 2), 0).compareTo(range.upperEndpoint()) <= 0;
+        return CommonUtil.strToInteger(names[names.length - 1], 0).compareTo(range.lowerEndpoint()) >= 0 && CommonUtil.strToInteger(names[names.length - 1], 0).compareTo(range.upperEndpoint()) <= 0;
     }
 }

@@ -1,7 +1,7 @@
 package com.weimob.bs.multidb.config.algorithm;
 
 import com.google.common.collect.Range;
-import com.weimob.bs.multidb.mysql.sjsupport.algorith.BaseTableAlgorithm;
+import com.weimob.bs.multidb.dao.mysql.sjsupport.algorith.BaseTableAlgorithm;
 import com.weimob.bs.multidb.utils.CommonUtil;
 
 /**
